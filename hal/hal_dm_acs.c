@@ -145,7 +145,8 @@ void rtw_acs_trigger(_adapter *adapter, u16 scan_time_ms, u8 scan_chan, enum NHM
 	struct dm_struct *phydm = adapter_to_phydm(adapter);
 #if (RTK_ACS_VERSION == 3)
 	struct clm_para_info clm_para;
-	struct nhm_para_info nhm_para;
+	/* init_nhm_param() leaves en_1db_mode and nhm_th0_manual unset. */
+	struct nhm_para_info nhm_para = {0};
 	struct env_trig_rpt trig_rpt;
 
 	scan_time_ms -= 10;
