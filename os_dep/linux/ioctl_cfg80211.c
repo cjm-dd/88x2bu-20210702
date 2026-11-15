@@ -9367,6 +9367,10 @@ static int cfg80211_rtw_get_mesh_config(struct wiphy *wiphy, struct net_device *
 
 	RTW_INFO(FUNC_ADPT_FMT"\n", FUNC_ADPT_ARG(adapter));
 
+	/* cfg80211 passes an uninitialized struct, and newer kernels add fields
+	 * this driver does not track, such as dot11MeshNolearn. */
+	_rtw_memset(conf, 0, sizeof(*conf));
+
 	/* driver MPM */
 	conf->dot11MeshRetryTimeout = 0;
 	conf->dot11MeshConfirmTimeout = 0;
