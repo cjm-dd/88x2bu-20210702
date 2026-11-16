@@ -9970,7 +9970,9 @@ static void rtw_cfg80211_init_ht_capab(_adapter *padapter
 
 	ht_cap->ht_supported = 1;
 
-	ht_cap->cap = IEEE80211_HT_CAP_MAX_AMSDU;
+	/* Leaving the SM power save field 0 would advertise static SMPS, a single
+	 * receive chain, and peers would send this device one spatial stream. */
+	ht_cap->cap = IEEE80211_HT_CAP_MAX_AMSDU | IEEE80211_HT_CAP_SM_PS;
 
 	if (TEST_FLAG(regsty->short_gi, BIT0))
 		ht_cap->cap |= IEEE80211_HT_CAP_SGI_20;
