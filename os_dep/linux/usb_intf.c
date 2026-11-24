@@ -70,6 +70,8 @@ static void rtw_dev_shutdown(struct device *dev)
 					else
 					#endif
 					{
+						rtw_set_drv_stopped(adapter);
+						rtw_stop_cmd_thread(adapter);
 						#ifdef CONFIG_BT_COEXIST
 						RTW_INFO("%s call halt notify\n", __FUNCTION__);
 						rtw_btcoex_HaltNotify(adapter);
